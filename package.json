@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "Deploy express js to vercel.",
 	"main": "index.js",
+	"type": "module",
 	"scripts": {
 		"start": "node index.js"
 	},
@@ -10,6 +11,8 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"express": "^4.17.1"
+		"dotenv": "^16.0.1",
+		"express": "^4.17.1",
+		"mongodb": "^4.8.0"
 	}
 }

@@ -1,17 +1,16 @@
-const express = require('express')
+import { config } from 'dotenv'
+await config()
+import express from 'express'
+import { MongoClient } from 'mongodb'
+
 const app = express()
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 3000
 
-app.use(express.json({ extended: false }))
+const client = await new MongoClient(process.env.mongoURL)
 
-let upTime = 0
-
-setInterval(() => {
-	upTime += 1
-}, 1000)
-
-app.get('/', (req, res) => {
-	res.send({ upTime })
+app.get('/', async (req, res) => {
+	let data = await client.db('test').collection('test').findOne({ _id: 1 })
+	res.send({ success: data ? data.test : false })
 })
 
-app.listen(PORT, () => console.log(`Server is running in port ${PORT}`))
+app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`))
